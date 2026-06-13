@@ -1,0 +1,40 @@
+{
+  "name": "sounddeck",
+  "version": "1.0.0",
+  "description": "Discord bot for rotating Soundboard presets.",
+  "type": "module",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "check": "tsc --noEmit",
+    "register:commands": "tsx src/deploy-commands.ts",
+    "db:init": "tsx src/scripts/sync-panels.ts",
+    "audio:validate": "tsx src/scripts/validate-panels.ts",
+    "panels:sync": "tsx src/scripts/sync-panels.ts",
+    "audio:normalize": "tsx src/scripts/normalize-audio.ts",
+    "commands:clear": "tsx src/scripts/clear-guild-commands.ts"
+  },
+  "keywords": [
+    "discord",
+    "soundboard",
+    "bot",
+    "typescript",
+    "docker"
+  ],
+  "author": "Juan Esteban Castillo Guardia",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^12.10.0",
+    "discord.js": "^14.26.4",
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.19.20",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,54 @@
+services:
+  sounddeck:
+    image: sounddeck:local
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: sounddeck
+
+    restart: unless-stopped
+    init: true
+
+    env_file:
+      - .env
+
+    environment:
+      NODE_ENV: production
+      DATABASE_PATH: /app/data/sounddeck.sqlite
+      SOUNDS_PATH: /app/sounds
+      NODE_OPTIONS: --max-old-space-size=96
+
+    volumes:
+      - type: bind
+        source: ./data
+        target: /app/data
+
+      - type: bind
+        source: ./sounds
+        target: /app/sounds
+        read_only: true
+
+    read_only: true
+
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+
+    cpus: 0.25
+    mem_limit: 192m
+    pids_limit: 64
+
+    cap_drop:
+      - ALL
+
+    security_opt:
+      - no-new-privileges:true
+
+    stop_grace_period: 20s
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
