@@ -5,3 +5,16 @@ data/*.sqlite
 data/*.sqlite-shm
 data/*.sqlite-wal
 .DS_Store
+
+# Local sound library: keep files on each host, never publish audio to Git.
+/sounds/**
+!/sounds/.gitkeep
+!/sounds/anime/
+/sounds/anime/**
+!/sounds/anime/.gitkeep
+!/sounds/memes/
+/sounds/memes/**
+!/sounds/memes/.gitkeep
+!/sounds/terror/
+/sounds/terror/**
+!/sounds/terror/.gitkeep
