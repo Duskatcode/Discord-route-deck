@@ -5,7 +5,7 @@ import {
   PermissionFlagsBits,
   SlashCommandBuilder
 } from "discord.js";
-
+import { canManagePanels } from "../auth/permissions.js";
 import {
   getActivePanel,
   getPanelByName,
@@ -111,18 +111,7 @@ function formatCurrentPanel() {
   ].join("\n");
 }
 
-function hasLoadPermission(
-  interaction: ChatInputCommandInteraction
-) {
-  return Boolean(
-    interaction.memberPermissions?.has(
-      PermissionFlagsBits.ManageGuildExpressions
-    ) ||
-    interaction.memberPermissions?.has(
-      PermissionFlagsBits.Administrator
-    )
-  );
-}
+
 
 export const panelCommand = {
   data: new SlashCommandBuilder()
@@ -281,7 +270,7 @@ export const panelCommand = {
         return;
       }
 
-      if (!hasLoadPermission(interaction)) {
+      if (!canManagePanels(interaction)) {
         await interaction.reply(
           createPrivateReply(
             "No tienes permiso para administrar las expresiones del servidor."
